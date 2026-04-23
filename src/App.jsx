@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import Home from './pages/Home';
 import Library from './pages/Library';
+import Events from './pages/Events';
 
 const initialMedia = [
   { id: 1, title: 'Giovanni\'s Room', author: 'James Baldwin', summary: 'A classic novel exploring complex themes of sexuality and identity.', available: true },
@@ -20,6 +22,7 @@ export default function App() {
   }, []);
 
   const [media, setMedia] = useState(initialMedia);
+
   const toggleCheckout = (id) => {
     setMedia(media.map(item => 
       item.id === id ? { ...item, available: !item.available } : item
@@ -29,14 +32,19 @@ export default function App() {
   let PageToRender;
   if (currentPath === '#/library') {
     PageToRender = <Library media={media} onToggleCheckout={toggleCheckout} />;
+  } else if (currentPath === '#/events') {
+    PageToRender = <Events />;
   } else {
     PageToRender = <Home />;
   }
 
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <Navbar />
-      {PageToRender}
+      <main className="flex-grow-1">
+        {PageToRender}
+      </main>
+      <Footer />
     </div>
   );
 }

@@ -5,6 +5,7 @@ export default function Navbar() {
         <a className="navbar-brand" href="#/">UW Madison GSCC</a>
         <div className="navbar-nav">
           <a className="nav-link" href="#/">Home</a>
+          <a className="nav-link" href="#/events">Events</a>
           <a className="nav-link" href="#/library">Community Lending Library</a>
         </div>
       </div>
