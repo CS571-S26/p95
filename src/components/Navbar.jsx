@@ -12,6 +12,7 @@ export default function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+            <Nav.Link as={NavLink} to="/about">About</Nav.Link>
             <Nav.Link as={NavLink} to="/events">Events</Nav.Link>
             <Nav.Link as={NavLink} to="/library">Library</Nav.Link>
             <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
