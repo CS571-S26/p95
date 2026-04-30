@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import EventCard from '../EventCard';
+import { useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import EventCard from '../components/EventCard';
 
 const initialEvents = [
   { id: 1, title: 'Queer Movie Night', date: 'Oct 24, 7:00 PM', location: 'Union South', description: 'Join us for a screening of a classic queer film with popcorn and drinks provided.', rsvped: false },
@@ -17,11 +18,15 @@ export default function Events() {
   };
 
   return (
-    <div className="container">
-      <h2 className="mb-4">Upcoming Events</h2>
-      <p className="lead mb-4">Discover and RSVP for upcoming events hosted by the Gender and Sexuality Campus Center and our partners.</p>
+    <Container className="py-5">
+      <div className="text-center mb-5">
+        <h1 className="display-5 fw-bold text-dark mb-3">Upcoming Events</h1>
+        <p className="lead text-muted">
+          Discover and RSVP for upcoming events hosted by the Gender and Sexuality Campus Center and our partners.
+        </p>
+      </div>
       
-      <div className="row">
+      <Row>
         {events.map(event => (
           <EventCard 
             key={event.id} 
@@ -29,7 +34,7 @@ export default function Events() {
             onRSVP={handleRSVP} 
           />
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }

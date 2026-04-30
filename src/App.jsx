@@ -1,26 +1,20 @@
-import { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import NavigationBar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Library from './pages/Library';
 import Events from './pages/Events';
+import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
 
 const initialMedia = [
   { id: 1, title: 'Giovanni\'s Room', author: 'James Baldwin', summary: 'A classic novel exploring complex themes of sexuality and identity.', available: true },
   { id: 2, title: 'Disclosure', author: 'Sam Feder', summary: 'An in-depth documentary film investigating trans representation in media.', available: true },
   { id: 3, title: 'Gender Trouble', author: 'Judith Butler', summary: 'Foundational text discussing performativity and gender politics.', available: true }
 ];
-//this is temporary. im just making this work first
 
 export default function App() {
-  
-  const [currentPath, setCurrentPath] = useState(window.location.hash || '#/');
-  useEffect(() => {
-    const onLocationChange = () => setCurrentPath(window.location.hash);
-    window.addEventListener('hashchange', onLocationChange);
-    return () => window.removeEventListener('hashchange', onLocationChange);
-  }, []);
-
   const [media, setMedia] = useState(initialMedia);
 
   const toggleCheckout = (id) => {
@@ -29,20 +23,17 @@ export default function App() {
     ));
   };
 
-  let PageToRender;
-  if (currentPath === '#/library') {
-    PageToRender = <Library media={media} onToggleCheckout={toggleCheckout} />;
-  } else if (currentPath === '#/events') {
-    PageToRender = <Events />;
-  } else {
-    PageToRender = <Home />;
-  }
-
   return (
-    <div className="d-flex flex-column min-vh-100">
-      <Navbar />
-      <main className="flex-grow-1">
-        {PageToRender}
+    <div className="d-flex flex-column min-vh-100 bg-white">
+      <NavigationBar />
+      <main className="flex-grow-1 d-flex flex-column">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/library" element={<Library media={media} onToggleCheckout={toggleCheckout} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
     </div>
